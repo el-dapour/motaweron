@@ -24,7 +24,7 @@
 
             <div class="col-lg-6 col-md-6 col-sm-12 col-12 ">
                 <div class="location-col">
-                    <img src="img/saudi-flag.png">
+                    <img src="{{ asset('img/saudi-flag.png') }}">
                     <h3>فرع السعوديه</h3>
 
                     <ul>
@@ -39,7 +39,7 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-12 ">
                 <div class="location-col">
 
-                    <img src="img/egypt-flag.png">
+                    <img src="{{asset('img/egypt-flag.png')}}">
                     <h3>فرع مصر</h3>
 
                     <ul>
@@ -82,7 +82,7 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6 col-12 ">
                 <!-- Form with header -->
-                <form action="{{ route('message') }}" method="post">
+                <form>
                     @csrf
                     <div class="card">
                         <div class="card-body">
@@ -104,7 +104,7 @@
                             </div>
                             <div class="md-form">
                                 <i class="fas fa-phone prefix grey-text"></i>
-                                <input type="number" id="phone" class="form-control" name="phone">
+                                <input id="phone" type="tel" class="form-control" name="phone">
                                 <label for="form-phone">رقم الهاتف</label>
                             </div>
                             <div class="md-form">
@@ -113,7 +113,7 @@
                                 <label for="form-text">الرساله</label>
                             </div>
                             <div class="text-center">
-                                <button class="btn btn-pink" name="submit" type="submit">إرسال</button>
+                                <button class="btn btn-pink" id="send" name="submit" type="submit">إرسال</button>
                             </div>
                         </div>
                     </div>
@@ -152,17 +152,42 @@
 <!--////////////////////////////////////////////////////////////////////////////////-->
 <!--////////////////////////////////////////////////////////////////////////////////-->
 <!--////////////////////////////////////////////////////////////////////////////////-->
-<script src="js/jquery-3.4.1.min.js"></script>
-<script src="js/popper.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/mdb.min.js"></script>
-<script src="js/smooth-scroll.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/swiper.js"></script>
-<script src="js/Custom.js"></script>
+<script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+<script src="{{ asset('js/popper.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('js/mdb.min.js') }}"></script>
+<script src="{{ asset('js/smooth-scroll.min.js') }}"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('js/wow.min.js') }}"></script>
+<script src="{{ asset('js/swiper.js') }}"></script>
+<script src="{{ asset('js/Custom.js') }}"></script>
 
 
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+<script>
+
+    $(document).on('click',`#send`,function (e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            "type": 'post',
+            "url":"{{route('message')}}",
+            "data": {
+                '_token' : "{{csrf_token()}}",
+                'name':$(`#name`).val(),
+                'email':$(`#email`).val(),
+                'phone':$(`#phone`).val(),
+                'message':$(`#message`).val(),
+            },
+            success(data) {
+            },
+            error(reject) {
+            },
+        });
+    });
+</script>
 
 </body>
 

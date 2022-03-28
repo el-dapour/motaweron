@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Background Image</label>
-                                    <input type="file" name="bg_img" class="form-control">
+                                    <input type="file" name="bg_img" class="form-control" value="{{ $serves->bg_img }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Title</label>
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Image</label>
-                                    <input type="file" name="img" class="form-control">
+                                    <input type="file" name="img" class="form-control" value="{{ $serves->img }}">
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>

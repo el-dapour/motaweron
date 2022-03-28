@@ -26,7 +26,6 @@ class ContactController extends Controller
 
         Contact::create($data);
 
-        return back();
     }
 
 }

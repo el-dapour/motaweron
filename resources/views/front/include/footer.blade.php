@@ -55,7 +55,7 @@
                 <!-- Grid column -->
                 <div class="col-lg-5 mb-lg-0 pb-lg-3 mb-4">
                     <!-- Form with header -->
-                    <form action="{{ route('message') }}" method="post">
+                    <form>
                         @csrf
                         <div class="card">
                             <div class="card-body">
@@ -77,7 +77,7 @@
                                 </div>
                                 <div class="md-form">
                                     <i class="fas fa-phone prefix grey-text"></i>
-                                    <input type="number" id="phone" class="form-control" name="phone">
+                                    <input type="tel" id="phone" class="form-control" name="phone">
                                     <label for="form-phone">رقم الهاتف</label>
                                 </div>
                                 <div class="md-form">
@@ -86,7 +86,7 @@
                                     <label for="form-text">الرساله</label>
                                 </div>
                                 <div class="text-center">
-                                    <button class="btn btn-pink" name="submit" type="submit">إرسال</button>
+                                    <button class="btn btn-pink" id="send" name="submit" type="submit">إرسال</button>
                                 </div>
                             </div>
                         </div>
@@ -213,6 +213,34 @@
         $("#third").removeClass("active");
         $("#fourth").addClass("active");
     });
+</script>
+
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
+<script>
+
+    $(document).on('click',`#send`, function (e) {
+
+        e.preventDefault();
+
+        $.ajax({
+            "type": 'post',
+            "url": "{{ route('message') }}",
+            "data": {
+                '_token': "{{ csrf_token() }}",
+                'name': $(`#name`).val(),
+                'email': $(`#email`).val(),
+                'phone': $(`#phone`).val(),
+                'message': $(`#message`).val(),
+            },
+            success(data) {
+            },
+            error(reject) {
+            },
+        });
+
+    });
+
 </script>
 
 </body>
